@@ -3,15 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Converter</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- jsPDF CDN (जरूरी) -->
+    <title>PDFMaster - Smart Document Converter</title>
+    <meta name="description" content="Convert documents instantly between PDF, JPG, PNG, and TXT formats. 100% client-side processing with premium security.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
 </head>
-<body>
-    <h2>Convert Image/Text to PDF</h2>
-    <input type="file" id="fileInput" multiple>
-    <button onclick="convertToPDF()">Convert to PDF</button>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header -->
+    <header class="container mx-auto px-4 py-6 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <img src="assets/logo.svg" alt="PDFMaster" class="h-8">
+            <nav class="hidden md:flex space-x-6">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">
+                🌓
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-4xl font-bold mb-6 dark:text-white">Convert Files Effortlessly</h1>
+            
+            <!-- Conversion Selector -->
+            <div class="conversion-types mb-8">
+                <select id="conversionType" class="bg-white dark:bg-gray-800 rounded-lg p-3 shadow-lg">
+                    <option value="jpgToPdf">JPG to PDF</option>
+                    <option value="pdfToJpg">PDF to JPG</option>
+                    <option value="textToPdf">Text to PDF</option>
+                    <option value="imageToText">Image to Text</option>
+                </select>
+            </div>
+
+            <!-- Upload Area -->
+            <div id="dropZone" class="border-4 border-dashed border-gray-300 dark:border-gray-700 rounded-2xl p-8 mb-8 transition-all duration-300 hover:border-blue-500">
+                <input type="file" id="fileInput" class="hidden" multiple>
+                <div class="upload-content">
+                    <span class="text-6xl">📁</span>
+                    <h3 class="text-xl mt-4 dark:text-white">Drag & Drop Files</h3>
+                    <p class="text-gray-500">or click to browse</p>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div id="previewArea" class="grid grid-cols-2 gap-4 mb-8"></div>
+
+            <!-- Progress Bar -->
+            <div id="progressBar" class="h-2 bg-gray-200 rounded-full hidden">
+                <div class="h-full bg-blue-500 rounded-full transition-all duration-300"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-center space-x-4">
+                <button id="convertBtn" class="btn-primary hidden">
+                    Convert Now
+                </button>
+                <button id="downloadBtn" class="btn-success hidden">
+                    Download
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-800 mt-12 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="social-links mb-4">
+                <a href="#" class="text-gray-600 dark:text-gray-300 mx-2">GitHub</a>
+                <a href="#" class="text-gray-600 dark:text-gray-300 mx-2">Twitter</a>
+                <a href="#" class="text-gray-600 dark:text-gray-300 mx-2">LinkedIn</a>
+            </div>
+            <p class="text-gray-600 dark:text-gray-300">
+                © 2024 PDFMaster. Powered by AI
+            </p>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
